@@ -13,4 +13,4 @@ const connection = mong.connect(process.env.MONGO_URL)
    })
    .catch((err) => console.log(err))
 
-module.exports = mong
+module.exports = mong;
