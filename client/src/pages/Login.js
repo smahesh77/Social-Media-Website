@@ -5,7 +5,7 @@ import axios from "axios";
 
 function Login() {
   const initialValues = {
-    username: "",
+    name: "",
     password: "",
   };
 
@@ -13,21 +13,32 @@ function Login() {
     username: Yup.string().min(3).max(15).required(),
     password: Yup.string().min(4).max(20).required(),
   });
+  const onSubmit = (data) => {
+    
+    axios.post("http://localhost:4000/auth/login", data).then((response) => {
+      if (response.data.error) {  
+        alert(response.data.error);
+      } else {
+        localStorage.setItem("accessToken", response.data.token);
+       
+      }
+    });
+  };
 
   return (
     <div>
       <Formik
         initialValues={initialValues}
-        // onSubmit={onSubmit}
+        onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
         <Form className="formContainer">
           <label>Username: </label>
-          <ErrorMessage name="username" component="span" />
+          <ErrorMessage name="name" component="span" />
           <Field
             autocomplete="off"
             id="inputCreatePost"
-            name="username"
+            name="name"
             placeholder="(Ex. John123...)"
           />
 

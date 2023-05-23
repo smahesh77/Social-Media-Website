@@ -7,10 +7,10 @@ app = express()
 app.use(express.json())
 app.use(cors())
 
-port =  process.env.PORT||4001
+port =  process.env.PORT||4000
 
 app.use('/user', userRouter)
 app.listen(port, (req, res) => {
-    console.log(`listening to port ${port}`)
+    console.log(`listening to port ${port}`);
     
 })

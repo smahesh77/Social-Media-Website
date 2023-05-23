@@ -55,7 +55,7 @@ function App() {
             element={
               <>
                 <Navbar />
-                <Reg />
+                <Login />
               </>
             }
           />
