@@ -1,1 +1,1 @@
-# Social-Media-Websitey
+# Social-Media-Website

@@ -1,27 +1,24 @@
-import React from 'react'
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import React from "react";
+import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
 function Reg() {
+  const initialValues = {
+    username: "",
+    password: "",
+  };
 
-    const initialValues = {
-        username: "",
-        password: "",
-    };
+  const validationSchema = Yup.object().shape({
+    username: Yup.string().min(3).max(15).required(),
+    password: Yup.string().min(4).max(20).required(),
+  });
 
-    const validationSchema = Yup.object().shape({
-        username: Yup.string().min(3).max(15).required(),
-        password: Yup.string().min(4).max(20).required(),
-    });
-
-
-
-    return (
-        <div>
-            <Formik
+  return (
+    <div>
+      <Formik
         initialValues={initialValues}
-        onSubmit={onSubmit}
+        // onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
         <Form className="formContainer">
@@ -30,7 +27,6 @@ function Reg() {
           <Field
             autocomplete="off"
             id="inputCreatePost"
-            
             name="username"
             placeholder="(Ex. John123...)"
           />
@@ -43,12 +39,13 @@ function Reg() {
             name="password"
             placeholder="Your Password..."
           />
+          <br></br>
 
           <button type="submit"> Register</button>
         </Form>
       </Formik>
-        </div>
-    )
+    </div>
+  );
 }
 
-export default Reg
+export default Reg;
