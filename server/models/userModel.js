@@ -1,6 +1,6 @@
-const moong = require('mongoose')
+const mong = require('mongoose')
 const db = require('../config/db')
-const {Schema} = moong
+const {Schema} = mong
 
 const userModel = db.model('user', new Schema({
     name: {
@@ -15,7 +15,9 @@ const userModel = db.model('user', new Schema({
     password: {
         type: String,
         required:true,
-    }
+    },
+    following: [{ type: mong.Schema.Types.ObjectId, ref: 'userModel' }],
+    followers: [{ type: mong.Schema.Types.ObjectId, ref: 'userModel' }]
 }))
-console.log("done")
-module.exports = userModel
+console.log("done");
+module.exports = userModel;
