@@ -4,7 +4,6 @@ const app = express();
 require("dotenv").config();
 
 const URI = process.env.MONGO_URL;
-console.log(URI);
 const connection = mong
   .connect(process.env.MONGO_URL)
   .then((result) => {

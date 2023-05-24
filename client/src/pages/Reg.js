@@ -10,18 +10,18 @@ function Reg() {
   };
 
   const validationSchema = Yup.object().shape({
-    username: Yup.string().min(3).max(15).required(),
+    name: Yup.string().min(3).max(15).required(),
     password: Yup.string().min(4).max(20).required(),
   });
   const onSubmit = (data) => {
     axios.post("http://localhost:4000/user/register", data).then((response) => {
       console.log(data);
-      alert("user created")
+      
       if (response.data.error) {  
         alert(response.data.error);
       } else {
-        localStorage.setItem("accessToken", response.data.token);
-        
+        //localStorage.setItem("accessToken", response.data.token);
+        alert("user created")
       }
     });
   };

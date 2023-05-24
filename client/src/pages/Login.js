@@ -10,18 +10,22 @@ function Login() {
   };
 
   const validationSchema = Yup.object().shape({
-    username: Yup.string().min(3).max(15).required(),
+    name: Yup.string().min(3).max(15).required(),
     password: Yup.string().min(4).max(20).required(),
   });
   const onSubmit = (data) => {
-    
-    axios.post("http://localhost:4000/auth/login", data).then((response) => {
+    axios.post("http://localhost:4000/user/login", data).then((response) => {
+      console.log("stuff")
       if (response.data.error) {  
         alert(response.data.error);
       } else {
         localStorage.setItem("accessToken", response.data.token);
-       
+        alert("user logged in")
+        console.log(data)
       }
+    }).catch((err) => {
+      console.log("failed")
+      alert("failed")
     });
   };
 
@@ -32,12 +36,12 @@ function Login() {
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
-        <Form className="formContainer">
+        <Form className="formContainer2">
           <label>Username: </label>
           <ErrorMessage name="name" component="span" />
           <Field
             autocomplete="off"
-            id="inputCreatePost"
+            id="login"
             name="name"
             placeholder="(Ex. John123...)"
           />
@@ -46,7 +50,7 @@ function Login() {
           <ErrorMessage name="password" component="span" />
           <Field
             type="password"
-            id="inputCreatePost"
+            id="login"
             name="password"
             placeholder="Your Password..."
           />
