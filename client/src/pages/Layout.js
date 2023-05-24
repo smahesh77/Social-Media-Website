@@ -9,7 +9,7 @@ function Layout() {
   const [listOfPosts, setListOfPosts] = useState([]); // gets the data from server in useEffect and stores in into list of posts
   let navigate = useNavigate(); // exactly like navigator
   useEffect(() => {
-    axios.get("http://localhost:3001/posts").then((response) => {
+    axios.get("http://localhost:4000/posts").then((response) => {
       setListOfPosts(response.data); // this will somehow send the data to listpost, dw about it now
     });
   }, []);
@@ -31,8 +31,8 @@ function Layout() {
               >
                 {/**navigator.push (where you want to go the route) the route must be specified*/}
                 <div className="title"> {value.title} </div>
-                <div className="body">{value.postText}</div>
-                <div className="footer">{value.username}</div>
+                <div className="body">{value.desc}</div>
+                <div className="footer">{value.userId}</div>
               </div>
             );
           })}

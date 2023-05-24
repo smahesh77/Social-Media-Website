@@ -60,3 +60,10 @@ p {
     border-radius: 0 10px 10px 0;
   }
 }
+
+.bottom-nav button {
+  cursor: pointer;
+  height: 20px;
+  width: 80px;
+  background-color: red;
+}
