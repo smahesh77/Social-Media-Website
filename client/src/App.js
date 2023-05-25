@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Sidebar from "./pages/Sidebar";
 import Navbar from "./pages/Navbar";
 import Profile from "./pages/Profile";
+import Find from "./pages/find";
 import Rightbar from "./pages/Rightbar";
 import "./App.css";
 
@@ -18,7 +19,7 @@ function App() {
       case 2:
         return <Layout />;
       case 3:
-        return <Layout />;
+        return <Find />;
       case 4:
         return <Profile />;
       default:
