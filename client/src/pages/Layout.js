@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 
 function Layout() {
   const [listOfPosts, setListOfPosts] = useState([]);
-  const [user, setuser] = useState()
+  const [user, setuser] = useState();
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function Layout() {
       <div className="ml-5 mr-5 mt-5">
         <div className="mb-5 flex justify-center drop-shadow-lg">
           <button
-            className="bg-blue-900 flex justify-center p-3 pl-8 pr- m-2 rounded-full"
+            className="bg-blue-900 flex justify-center p-3 pl-8 pr-8 m-2 rounded-full"
             onClick={() => navigate("/posts/create")}
           >
             <p className=" text-1.5xl text-white">Add Post</p>
