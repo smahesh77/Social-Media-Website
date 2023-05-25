@@ -26,15 +26,7 @@ const userSchema = new Schema({
   }]
 });
 
-// userSchema.path('followers').validate(async function (value) {
-//   const userId = this._id;
-//   const duplicateFollowers = await mongoose.models.user.countDocuments({
-//     _id: { $ne: userId },
-//     followers: { $in: value }
-//   });
 
-//   return duplicateFollowers === 0;
-// }, 'Duplicate followers are not allowed.');
 
 const userModel = db.model('user', userSchema);
 console.log("done");

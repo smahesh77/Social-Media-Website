@@ -2,9 +2,10 @@ import React from "react";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function Login() {
+  let navigate = useNavigate();
   const initialValues = {
     name: "",
     password: "",
@@ -25,6 +26,7 @@ function Login() {
           localStorage.setItem("accessToken", response.data.token);
           alert("user logged in");
           console.log(data);
+          navigate("/");
         }
       })
       .catch((err) => {

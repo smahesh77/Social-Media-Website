@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+import axios from "axios";
 // import styled from "styled-components";
 // import avatar from "../../img/avatar.png";
 import "./Rightbar.css";
@@ -7,6 +8,7 @@ import {friendsDummy} from "../utils/friendsDummy";
 
 function Rightbar() {
   const [authState, setAuthState] = useState(false);
+  const [friends, setFriends] = useState([])
 
   const signOut = () => {
     localStorage.removeItem("accessToken");
@@ -18,13 +20,35 @@ function Rightbar() {
     if (localStorage.getItem("accessToken")) {
       setAuthState(true);
     }
+  
+    try {
+      axios
+        .post("http://localhost:4000/user/getfollowing", null, {
+          headers: {
+            accessToken: localStorage.getItem("accessToken"),
+          },
+        })
+        .then((response) => {
+          console.log("got into following list");
+          console.log(response.data);
+          setFriends(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("An error occurred while fetching following list.");
+        });
+    } catch (err) {
+      console.error(err);
+      alert("An error occurred while fetching following list.");
+    }
   }, []);
+  
 
   return (
     <div className="right-nav-styled">
       <div className="user-con">{/* <img src={avatar} /> */}</div>
-      <ul className="menu-items">
-        {friendsDummy.map((item) => {
+      {authState && <ul className="menu-items">
+        {friends.map((item) => {
           return (
             <li key={item.id} onClick>
               <img
@@ -35,11 +59,11 @@ function Rightbar() {
                 alt="profile"
               ></img>
 
-              <span className="pl-3">{item.title}</span>
+              <span className="pl-3">{item.name}</span>
             </li>
           );
         })}
-      </ul>
+      </ul>}
       {authState && (
         <div className="bottom-nav">
           <button onClick={signOut}>Sign out</button>

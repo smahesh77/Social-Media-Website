@@ -25,10 +25,12 @@ router.post('/create', async (req, res) => {
     }
 
 })
+//get all posts
 router.get('/', async (req, res) => {
     try {
         const result = await postModel.find({});
-        res.status(200).json(result);
+        const user = await userModel.findById(result.id)
+        res.status(200).json({posts: result, user: user});
       } catch (err) {
         res.status(500).json(err);
       }
