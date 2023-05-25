@@ -20,11 +20,29 @@ function Rightbar() {
     if (localStorage.getItem("accessToken")) {
       setAuthState(true);
     }
-    
-    axios.get("http://localhost:4000/user/getusers/").then((response) => {
-      setFriends(response.data);
-    });
+  
+    try {
+      axios
+        .post("http://localhost:4000/user/getfollowing", null, {
+          headers: {
+            accessToken: localStorage.getItem("accessToken"),
+          },
+        })
+        .then((response) => {
+          console.log("got into following list");
+          console.log(response.data);
+          setFriends(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("An error occurred while fetching following list.");
+        });
+    } catch (err) {
+      console.error(err);
+      alert("An error occurred while fetching following list.");
+    }
   }, []);
+  
 
   return (
     <div className="right-nav-styled">

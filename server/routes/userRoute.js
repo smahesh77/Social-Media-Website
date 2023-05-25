@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const userModel = require('../models/userModel');
 const { json } = require('express');
 const jwt = require('jsonwebtoken')
+const {validateToken} = require('../middleware/validateToken')
 
 router.post("/register", (req, res) => {
     const { name, email, password } = req.body;
@@ -30,7 +31,7 @@ router.post('/login', async (req, res) => {
             if (!match) {
                 res, json("Wrong password")
             } else {
-                const token = jwt.sign({ name: user.name, id: user.id, user: user }, "key")
+                const token = jwt.sign({ name: user.name, id: user.id, user: user, following: user.following }, "key")
                 res.json({
                     status: "Logged in",
                     token: token,
@@ -46,14 +47,26 @@ router.post('/login', async (req, res) => {
 })
 
 // to get users
-router.get('/getusers', async (req, res) => {
+router.post('/getfollowing',validateToken, async (req, res) => {
     try {
         const result = await userModel.find({})
         console.log("getting in")
-        console.log(result.name)
-        res.status(200).json(result);
+        console.log(res.header("accessToken"))
+        const followersId = req.user.user.following
+        const users =[]
+        let i = 0
+        await Promise.all(
+            followersId.map(async (element) => {
+              const newUser = await userModel.findById(element);
+              users.push(newUser);
+            })
+          );
+      
+        console.log(users)
+        res.json(users)
+        //res.status(200).json(req.user.following);
     } catch (err) {
-        res.status(400).json(err)
+        res.status(400).json("something went wrong")
     }
 })
 
@@ -65,11 +78,11 @@ router.post('/follow', async (req, res) => {
         const user2 = await userModel.findOne({ name: name2 }) //user1 will follow user2
         console.log(user1.name)
         if (!(user1 || user2)) {
-            res.json({ error: "Make sure the users exist" })
+            res.json( "Make sure the users exist" )
         } else {
             if (!user2.followers.includes(user1.id)) {
                 await user2.updateOne({ $push: { followers: user1.id } });
-                await user1.updateOne({ $push: { followings: user2.id } });
+                await user1.updateOne({ $push: { following: user2.id } });
                 res.status(200).json(`${user1.name} started following ${user2.name}`);
             } else {
                 res.status(403).json("you already follow this user");
