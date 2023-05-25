@@ -17,13 +17,13 @@ function Layout() {
 
   return (
     <>
-      <div className="ml-5 mt-5 max-w-md ">
+      <div className="ml-5 mr-5 mt-5">
         <div className="mb-5 flex justify-center drop-shadow-lg">
           <button
-            className="bg-pink-100 flex justify-center p-3 pl-5 pr-5 m-2 rounded-full text-1.5xl"
+            className="bg-blue-900 flex justify-center p-3 pl-6 pr-6 m-2 rounded-full"
             onClick={() => navigate("/posts/create")}
           >
-            Add Post
+            <p className=" text-1.5xl text-white">Add Post</p>
           </button>
         </div>
 
@@ -31,14 +31,14 @@ function Layout() {
           {reversedPosts.map((value, key) => {
             return (
               <div
-                className="post mt-2 mb-2"
+                className="post mt-2 mb-3"
                 onClick={() => {
                   navigate(`/post/${value.id}`);
                 }}
               >
-                <div className="max-w-lg overflow-hidden rounded drop-shadow-xl">
+                <div className="overflow-hidden bg-white rounded drop-shadow-xl">
                   <img
-                    className="h-auto max-w-full rounded-lg border transition-shadow"
+                    className="post-image h-auto w-full max-h-56 rounded-lg transition-shadow"
                     src="https://tecdn.b-cdn.net/img/new/standard/city/047.jpg"
                     alt="post image "
                   />

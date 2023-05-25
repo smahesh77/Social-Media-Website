@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <>
       <nav className="navbar">
-        <h2 className="sociohub">SocioHub</h2>
+        <h2 className="sociohub pl-5">SocioHub</h2>
         <ul className="hg">
           <li>
             <Link to="/">Home</Link>

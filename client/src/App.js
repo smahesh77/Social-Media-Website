@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Sidebar from "./pages/Sidebar";
 import Navbar from "./pages/Navbar";
 import Profile from "./pages/Profile";
+import Rightbar from "./pages/Rightbar";
 import "./App.css";
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
                 <div className="layout">
                   <Sidebar active={active} setActive={setActive} />
                   <div className="right-side">{displayData()}</div>
+                  <Rightbar active={active} setActive={setActive} />
                 </div>
               </>
             }

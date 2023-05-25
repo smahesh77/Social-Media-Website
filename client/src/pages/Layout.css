@@ -7,3 +7,6 @@
   grid-template-columns: repeat(5, 1fr);
   gap: 2rem;
 } */
+.post-image {
+  width: 100%;
+}

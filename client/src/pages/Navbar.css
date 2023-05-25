@@ -1,14 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&family=Ubuntu:ital,wght@1,700&display=swap");
-* {
-  background-color: #ffff;
-}
+/* * {
+  background-color: #ffffff;
+} */
 .navbar {
   display: flex;
   justify-content: space-between;
   padding: 12px;
   padding-left: 8px;
   font-family: "Poppins";
-  background-color: #938989;
+  background-color: #222260;
 }
 .hg {
   list-style: none;
@@ -23,7 +23,7 @@
   font-size: 18px;
 }
 .sociohub {
-  color: #11d9c5;
+  color: #ffffff;
   font-size: 1.6rem;
 }
 img {
