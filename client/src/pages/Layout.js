@@ -4,35 +4,60 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 function Layout() {
-  // return (
+  const [listOfPosts, setListOfPosts] = useState([]);
+  let navigate = useNavigate();
 
-  const [listOfPosts, setListOfPosts] = useState([]); // gets the data from server in useEffect and stores in into list of posts
-  let navigate = useNavigate(); // exactly like navigator
   useEffect(() => {
     axios.get("http://localhost:4000/posts").then((response) => {
-      setListOfPosts(response.data); // this will somehow send the data to listpost, dw about it now
+      setListOfPosts(response.data);
     });
   }, []);
-  // to make the new blogs come first
-  const reversedPosts = [...listOfPosts].reverse(); //value will go through each object in the list
+
+  const reversedPosts = [...listOfPosts].reverse();
+
   return (
     <>
-      <div>
-        <h1>Layout</h1>
-        <p>This is main page</p>
+      <div className="ml-5 mt-5 max-w-md ">
+        <div className="mb-5 flex justify-center drop-shadow-lg">
+          <button
+            className="bg-pink-100 flex justify-center p-3 pl-5 pr-5 m-2 rounded-full text-1.5xl"
+            onClick={() => navigate("/posts/create")}
+          >
+            Add Post
+          </button>
+        </div>
+
         <div>
           {reversedPosts.map((value, key) => {
             return (
               <div
-                className="post"
+                className="post mt-2 mb-2"
                 onClick={() => {
                   navigate(`/post/${value.id}`);
                 }}
               >
-                {/**navigator.push (where you want to go the route) the route must be specified*/}
-                <div className="title"> {value.title} </div>
-                <div className="body">{value.desc}</div>
-                <div className="footer">{value.userId}</div>
+                <div className="max-w-lg overflow-hidden rounded drop-shadow-xl">
+                  <img
+                    className="h-auto max-w-full rounded-lg border transition-shadow"
+                    src="https://tecdn.b-cdn.net/img/new/standard/city/047.jpg"
+                    alt="post image "
+                  />
+                  <div className="px-6 py-4">
+                    <div className="font-bold text-xl mb-2">{value.title}</div>
+                    <p className="text-gray-700 text-base">{value.desc}</p>
+                  </div>
+                  <div className="px-6 pt-4 pb-2">
+                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                      #photography
+                    </span>
+                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                      #travel
+                    </span>
+                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                      {value.userId}
+                    </span>
+                  </div>
+                </div>
               </div>
             );
           })}

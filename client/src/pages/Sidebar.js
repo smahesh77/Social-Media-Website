@@ -1,25 +1,24 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 // import styled from "styled-components";
 // import avatar from "../../img/avatar.png";
 import "./Sidebar.css";
-import { menuItems } from "../utils/menuItems";
+import {menuItems} from "../utils/menuItems";
 // import {signout} from "../../utils/Icons";
 
-function Sidebar({ active, setActive }) {
-
-  const [authState, setAuthState] = useState(false)
+function Sidebar({active, setActive}) {
+  const [authState, setAuthState] = useState(false);
 
   const signOut = () => {
-    localStorage.removeItem("accessToken")
-    setAuthState(false)
-    alert("you have logged out")
-  }
- 
+    localStorage.removeItem("accessToken");
+    setAuthState(false);
+    alert("you have logged out");
+  };
+
   useEffect(() => {
-    if(localStorage.getItem("accessToken")){
-      setAuthState(true)
+    if (localStorage.getItem("accessToken")) {
+      setAuthState(true);
     }
-  }, [])
+  }, []);
 
   return (
     <div className="nav-styled">
@@ -38,11 +37,11 @@ function Sidebar({ active, setActive }) {
           );
         })}
       </ul>
-      {
-        authState && <div className="bottom-nav">
+      {authState && (
+        <div className="bottom-nav">
           <button onClick={signOut}>Sign out</button>
         </div>
-      }
+      )}
     </div>
   );
 }
