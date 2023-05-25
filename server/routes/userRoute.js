@@ -45,6 +45,18 @@ router.post('/login', async (req, res) => {
     }
 })
 
+// to get users
+router.get('/getusers', async (req, res) => {
+    try {
+        const result = await userModel.find({})
+        console.log("getting in")
+        console.log(result.name)
+        res.status(200).json(result);
+    } catch (err) {
+        res.status(400).json(err)
+    }
+})
+
 // link to follow 
 router.post('/follow', async (req, res) => {
     const { name1, name2 } = req.body // this will take two emails, one for the user who wants to follow(userEmail) and one for the user who wants to follow(followEmail)
@@ -55,11 +67,21 @@ router.post('/follow', async (req, res) => {
     if (!(user1 || user2)) {
         res.json({ error: "Make sure the users exist" })
     } else {
-        user1.following.push(user2.id);
-        await user1.save()
-        user2.followers.push(user1);
-        await user2.save()
-        res.json({msg: `${user1.name} started following ${user2.name}`})
+       if (!user2.followers.includes(user1.id)) {
+        await user2.updateOne({ $push: { followers: user1.id } });
+        await user1.updateOne({ $push: { followings: user2.id } });
+        res.status(200).json(`${user1.name} started following ${user2.name}`);
+      } else {
+        res.status(403).json("you already follow this user");
+      }
+
+    //   if (!user.followers.includes(req.body.userId)) {
+    //     await user.updateOne({ $push: { followers: req.body.userId } });
+    //     await currentUser.updateOne({ $push: { followings: req.params.id } });
+    //     res.status(200).json("user has been followed");
+    //   } else {
+    //     res.status(403).json("you allready follow this user");
+    //   }
     }
     } catch (err) {
         res.json(err)
