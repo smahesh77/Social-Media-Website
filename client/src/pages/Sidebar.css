@@ -36,19 +36,10 @@ p {
   color: rgba(34, 34, 96, 0.6);
   padding-left: 1rem;
   position: relative;
-  /* i {
-    color: rgba(34, 34, 96, 0.6);
-    background: rgba(55, 48, 51, 0.78);
-    font-size: 1.4rem;
-    transition: all 0.4s ease-in-out;
-  } */
 }
 
 .active {
   color: rgba(34, 34, 96, 1) !important;
-  /* i {
-    color: rgba(34, 34, 96, 1) !important;
-  } */
   &::before {
     content: "";
     position: absolute;
@@ -63,7 +54,4 @@ p {
 
 .bottom-nav button {
   cursor: pointer;
-  height: 20px;
-  width: 80px;
-  background-color: red;
 }

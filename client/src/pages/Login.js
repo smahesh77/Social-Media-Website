@@ -2,6 +2,7 @@ import React from "react";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 function Login() {
   const initialValues = {
@@ -14,50 +15,107 @@ function Login() {
     password: Yup.string().min(4).max(20).required(),
   });
   const onSubmit = (data) => {
-    axios.post("http://localhost:4000/user/login", data).then((response) => {
-      console.log("stuff")
-      if (response.data.error) {  
-        alert(response.data.error);
-      } else {
-        localStorage.setItem("accessToken", response.data.token);
-        alert("user logged in")
-        console.log(data)
-      }
-    }).catch((err) => {
-      console.log("failed")
-      alert("failed")
-    });
+    axios
+      .post("http://localhost:4000/user/login", data)
+      .then((response) => {
+        console.log("stuff");
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          localStorage.setItem("accessToken", response.data.token);
+          alert("user logged in");
+          console.log(data);
+        }
+      })
+      .catch((err) => {
+        console.log("failed");
+        alert("failed");
+      });
   };
 
   return (
     <div>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-      >
-        <Form className="formContainer2">
-          <label>Username: </label>
-          <ErrorMessage name="name" component="span" />
-          <Field
-            autocomplete="off"
-            id="login"
-            name="name"
-            placeholder="(Ex. John123...)"
-          />
+      <section className="bg-white h-screen">
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+          <div className="flex items-center justify-center px-4 py-10 bg-white sm:px-6 lg:px-8 sm:py-16 lg:py-24">
+            <div className="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto">
+              <h2 className="text-3xl font-bold font-display leading-tight text-black sm:text-4xl">
+                Login
+              </h2>
+              <p className="mt-2 text-base mr-2 text-gray-600">
+                Don't have an account?
+                <Link to="/reg"> Sign Up</Link>
+              </p>
+              <Formik
+                initialValues={initialValues}
+                onSubmit={onSubmit}
+                validationSchema={validationSchema}
+              >
+                <Form className="formContainer2">
+                  <form className="mt-8">
+                    <div className="space-y-5">
+                      <div>
+                        <label className="text-base font-medium font-body text-gray-900">
+                          Username
+                        </label>
+                        <ErrorMessage name="name" component="span" />
+                        <div className="mt-2.5">
+                          <input
+                            required
+                            id="login"
+                            type="Username"
+                            name="name"
+                            placeholder="Enter Username"
+                            className="block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600"
+                          />
+                        </div>
+                      </div>
 
-          <label>Password: </label>
-          <ErrorMessage name="password" component="span" />
-          <Field
-            type="password"
-            id="login"
-            name="password"
-            placeholder="Your Password..."
-          />
-          <br></br>
-          <button type="submit"> Login</button>
-        </Form>
-      </Formik>
+                      <div>
+                        <div className="flex items-center justify-between">
+                          <label className="text-base font-medium font-body text-gray-900">
+                            Password
+                          </label>
+                          <ErrorMessage name="password" component="span" />
+                        </div>
+                        <div className="mt-2.5">
+                          <input
+                            required
+                            type="password"
+                            id="login"
+                            name="password"
+                            placeholder="Password"
+                            className="block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600"
+                          />
+                        </div>
+                      </div>
+
+                      <button
+                        type="submit"
+                        className="inline-flex font-body items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md focus:outline-none hover:bg-blue-700 focus:bg-blue-700"
+                      >
+                        Login
+                      </button>
+                    </div>
+                  </form>
+                </Form>
+              </Formik>
+
+              <div className="mt-3 space-y-3"></div>
+            </div>
+          </div>
+
+          <div className="flex h-screen overflow-hidden bg-white rounded drop-shadow-xl">
+            <div className="m-auto">
+              <img
+                className="h-auto w-full max-h-screen rounded-lg transition-shadow"
+                src="https://images.unsplash.com/photo-1530047139082-5435ca3c4614?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTA5fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=600&q=60"
+                alt="profile"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
