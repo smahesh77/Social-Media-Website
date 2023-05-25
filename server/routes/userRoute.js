@@ -30,15 +30,15 @@ router.post('/login', async (req, res) => {
             if (!match) {
                 res, json("Wrong password")
             } else {
-                const token = jwt.sign({  name: user.name, id: user.id, user: user }, "key")
-                res.json({ 
+                const token = jwt.sign({ name: user.name, id: user.id, user: user }, "key")
+                res.json({
                     status: "Logged in",
                     token: token,
                     name: user.name,
                     followersIds: user.followers,
                     followerCount: user.followers.length,
                     followingId: user.following,
-                    followingCount:user.following.length 
+                    followingCount: user.following.length
                 })
             }
         })
@@ -64,34 +64,42 @@ router.post('/follow', async (req, res) => {
         const user1 = await userModel.findOne({ name: name1 })
         const user2 = await userModel.findOne({ name: name2 }) //user1 will follow user2
         console.log(user1.name)
-    if (!(user1 || user2)) {
-        res.json({ error: "Make sure the users exist" })
-    } else {
-       if (!user2.followers.includes(user1.id)) {
-        await user2.updateOne({ $push: { followers: user1.id } });
-        await user1.updateOne({ $push: { followings: user2.id } });
-        res.status(200).json(`${user1.name} started following ${user2.name}`);
-      } else {
-        res.status(403).json("you already follow this user");
-      }
+        if (!(user1 || user2)) {
+            res.json({ error: "Make sure the users exist" })
+        } else {
+            if (!user2.followers.includes(user1.id)) {
+                await user2.updateOne({ $push: { followers: user1.id } });
+                await user1.updateOne({ $push: { followings: user2.id } });
+                res.status(200).json(`${user1.name} started following ${user2.name}`);
+            } else {
+                res.status(403).json("you already follow this user");
+            }
 
-    //   if (!user.followers.includes(req.body.userId)) {
-    //     await user.updateOne({ $push: { followers: req.body.userId } });
-    //     await currentUser.updateOne({ $push: { followings: req.params.id } });
-    //     res.status(200).json("user has been followed");
-    //   } else {
-    //     res.status(403).json("you allready follow this user");
-    //   }
-    }
+
+        }
     } catch (err) {
         res.json(err)
     }
-    
-    
-
-
-
 
 })
+
+router.post("/unfollow", async (req, res) => {
+    const { name1, name2 } = req.body
+    try {
+        console.log("got in")
+        const user1 = await userModel.findOne({ name: name1 })
+        const user2 = await userModel.findOne({ name: name2 }) //user1 will unfollow user2
+        if (user2.followers.includes(user1.id)) {
+            await user2.updateOne({ $pull: { followers: user1.id } });
+            await user1.updateOne({ $pull: { followings: user1.id} });
+            res.status(200).json(`${user1.name} has unfollowed ${user2.name}`);
+        } else { 
+            res.status(403).json("you dont follow this user");
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+
+});
 
 module.exports = router
