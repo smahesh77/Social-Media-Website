@@ -62,7 +62,7 @@ function Login() {
                         </label>
                         <ErrorMessage name="name" component="span" />
                         <div className="mt-2.5">
-                          <input
+                          <Field
                             required
                             id="login"
                             type="Username"
@@ -81,7 +81,7 @@ function Login() {
                           <ErrorMessage name="password" component="span" />
                         </div>
                         <div className="mt-2.5">
-                          <input
+                          <Field
                             required
                             type="password"
                             id="login"

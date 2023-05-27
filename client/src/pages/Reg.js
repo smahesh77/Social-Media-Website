@@ -55,7 +55,7 @@ function Reg() {
                         </label>
                         <ErrorMessage name="name" component="span" />
                         <div className="mt-2.5">
-                          <input
+                          <Field
                             required
                             id="inputCreatePost"
                             type="Username"
@@ -74,7 +74,7 @@ function Reg() {
                           <ErrorMessage name="password" component="span" />
                         </div>
                         <div className="mt-2.5">
-                          <input
+                          <Field
                             required
                             type="password"
                             id="inputCreatePost"
@@ -89,7 +89,7 @@ function Reg() {
                         type="submit"
                         className="inline-flex font-body items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md focus:outline-none hover:bg-blue-700 focus:bg-blue-700"
                       >
-                        Login
+                        Sign Up
                       </button>
                     </div>
                   </form>

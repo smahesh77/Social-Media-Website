@@ -37,13 +37,11 @@ function Sidebar({active, setActive}) {
           );
         })}
       </ul>
-      {
-        //authState && (
+      {authState && (
         <div className="bottom-nav">
           <button onClick={signOut}>{signout} Sign out</button>
         </div>
-        //)
-      }
+      )}
     </div>
   );
 }
