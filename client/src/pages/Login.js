@@ -54,7 +54,7 @@ function Login() {
                 validationSchema={validationSchema}
               >
                 <Form className="formContainer2">
-                  <form className="mt-8">
+                  <div className="mt-8">
                     <div className="space-y-5">
                       <div>
                         <label className="text-base font-medium font-body text-gray-900">
@@ -99,7 +99,7 @@ function Login() {
                         Login
                       </button>
                     </div>
-                  </form>
+                  </div>
                 </Form>
               </Formik>
 

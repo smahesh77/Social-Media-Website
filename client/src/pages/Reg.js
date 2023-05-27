@@ -47,7 +47,7 @@ function Reg() {
                 validationSchema={validationSchema}
               >
                 <Form className="formContainer">
-                  <form className="mt-8">
+                  <div className="mt-8">
                     <div className="space-y-5">
                       <div>
                         <label className="text-base font-medium font-body text-gray-900">
@@ -92,7 +92,7 @@ function Reg() {
                         Sign Up
                       </button>
                     </div>
-                  </form>
+                  </div>
                 </Form>
               </Formik>
 
