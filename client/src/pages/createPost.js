@@ -14,7 +14,7 @@ function CreatePost() {
   };
 
   const onSubmit = (data) => {
-    axios.post("http://localhost:3001/posts/create", data).then((response) => {
+    axios.post("https://sochub.onrender.com/posts/create", data).then((response) => {
       // sends the data to server
       if (response.data.error) {
         alert("You are not Authorized, please log in!");

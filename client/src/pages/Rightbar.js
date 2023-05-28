@@ -20,7 +20,7 @@ function Rightbar() {
 
     try {
       axios
-        .post("http://localhost:4000/user/getfollowing", null, {
+        .post("https://sochub.onrender.com/user/getfollowing", null, {
           headers: {
             accessToken: localStorage.getItem("accessToken"),
           },

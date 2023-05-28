@@ -17,7 +17,7 @@ function Reg() {
   });
 
   const onSubmit = (data) => {
-    axios.post("http://localhost:4000/user/register", data).then((response) => {
+    axios.post("https://sochub.onrender.com/user/register", data).then((response) => {
       console.log(data);
 
       if (response.data.error) {

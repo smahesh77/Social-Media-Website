@@ -14,7 +14,7 @@ function Find() {
 
     try {
       axios
-        .post("http://localhost:4000/user/getusers", null, {
+        .post("https://sochub.onrender.com/user/getusers", null, {
           headers: {
             accessToken: localStorage.getItem("accessToken"),
           },
@@ -38,7 +38,7 @@ function Find() {
     console.log("in here");
     axios
       .post(
-        "http://localhost:4000/user/follow",
+        "https://sochub.onrender.com/user/follow",
         {
           name2: name,
         },

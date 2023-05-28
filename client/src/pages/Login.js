@@ -18,7 +18,7 @@ function Login() {
   const onSubmit = (data) => {
     console.log("clicked login button");
     axios
-      .post("http://localhost:4000/user/login", data)
+      .post("https://sochub.onrender.com/user/login", data)
       .then((response) => {
         console.log("stuff");
         if (response.data.error) {

@@ -10,7 +10,7 @@ router.post("/register", (req, res) => {
     console.log(name)
     bcrypt.hash(password, 10).then(async (hash) => {
         try {
-            const newUser = new userModel(req.body)
+            const newUser = new userModel({name: name, password: hash})
             await newUser.save()
             res.json({ status: "User created", user: { name: name, email: email } })
         } catch (err) {
