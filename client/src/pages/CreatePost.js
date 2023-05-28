@@ -9,7 +9,7 @@ function CreatePost() {
   let navigate = useNavigate();
   const initialValues = {
     title: "",
-    postText: "",
+    desct: "",
     username: "",
   };
 
