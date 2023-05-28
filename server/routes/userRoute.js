@@ -10,7 +10,7 @@ router.post("/register", (req, res) => {
     console.log(name)
     bcrypt.hash(password, 10).then(async (hash) => {
         try {
-            const newUser = new userModel({ name: name, password: hash, email: email })
+            const newUser = new userModel(req.body)
             await newUser.save()
             res.json({ status: "User created", user: { name: name, email: email } })
         } catch (err) {
@@ -69,6 +69,7 @@ router.post('/getfollowing', validateToken, async (req, res) => {
         res.status(400).json("something went wrong")
     }
 })
+//get all users
 router.post('/getusers', async (req, res) => {
     try {
         const result = await userModel.find({})
@@ -77,6 +78,13 @@ router.post('/getusers', async (req, res) => {
     } catch (err) {
         res.status(400).json("something went wrong")
     }
+})
+
+// get user data for user profile
+router.get('/getprofile', validateToken, async (req, res) => {
+    const id = req.user.id
+    const user = await userModel.findById(id)
+    res.json({user: user, name: user.name})
 })
 
 // link to follow 
