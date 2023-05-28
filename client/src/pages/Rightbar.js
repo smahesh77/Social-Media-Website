@@ -41,7 +41,7 @@ function Rightbar() {
   }, []);
 
   return (
-    <div className="right-nav-styled">
+    <div className="right-nav-styled mt-2">
       <div className="user-con">{/* <img src={avatar} /> */}</div>
       {authState && (
         <ul className="menu-items">

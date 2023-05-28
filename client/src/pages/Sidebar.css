@@ -1,4 +1,5 @@
 .nav-styled {
+  flex: 1;
   padding: 2rem 1.5rem;
   width: 374px;
   max-width: 24%;

@@ -8,6 +8,7 @@ import Navbar from "./pages/Navbar";
 import Profile from "./pages/Profile";
 import Find from "./pages/find";
 import Rightbar from "./pages/Rightbar";
+import CreatePost from "./pages/CreatePost";
 import "./App.css";
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
                 <div className="layout">
                   <Sidebar active={active} setActive={setActive} />
                   <div className="right-side">{displayData()}</div>
-                  <Rightbar active={active} setActive={setActive} />
+                  <Rightbar />
                 </div>
               </>
             }
@@ -59,6 +60,22 @@ function App() {
               <>
                 <Navbar />
                 <Login />
+              </>
+            }
+          />
+          <Route
+            path="/posts/create"
+            element={
+              <>
+                <Navbar />
+                <div className="layout">
+                  <Sidebar active={active} setActive={setActive} />
+                  <div className="right-side">
+                    <CreatePost />
+                  </div>
+
+                  <Rightbar />
+                </div>
               </>
             }
           />

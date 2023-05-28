@@ -2,10 +2,11 @@ import React from "react";
 import axios from "axios";
 import {Formik, Form, Field, ErrorMessage} from "formik"; // for forms
 import * as yup from "yup"; //for validation
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import "./Rightbar.css";
 
 function CreatePost() {
-  let history = useHistory();
+  let navigate = useNavigate();
   const initialValues = {
     title: "",
     postText: "",
@@ -13,15 +14,15 @@ function CreatePost() {
   };
 
   const onSubmit = (data) => {
-    axios.post("http://localhost:3001/posts", data).then((response) => {
+    axios.post("http://localhost:3001/posts/create", data).then((response) => {
       // sends the data to server
       if (response.data.error) {
         alert("You are not Authorized, please log in!");
-        history.push("/log");
+        navigate("/log");
       } else {
         console.log(response.data);
         console.log("IT WORKS");
-        history.push("/");
+        navigate("/");
       }
     });
   };
@@ -32,45 +33,113 @@ function CreatePost() {
     postText: yup.string().required(),
     username: yup
       .string()
-      .required("Enter ya name brosky")
-      .min(3, "Your name aint that short homie")
-      .max(15, "Quit playin' fool"),
+      .required("Enter your name")
+      .min(3, "Minimum 4 characters")
+      .max(15, "Maximum length exceeded"),
   });
 
   return (
-    <div className="createPostPage">
+    <div className="createPostPage mt-7 ml-6 mr-6">
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
-        <Form className="formContainer">
-          <label>Title: </label>
-          <Field
-            id="inputCreatePost"
-            name="title"
-            placeholder="(Ex. Title...)"
-          />{" "}
-          {/* thw title postText and username has the exactly same as that of the sql model only then the data could be send*/}
-          <ErrorMessage className="error" name="title" component="span" />
-          <label>Post: </label>
-          <Field
-            id="inputCreatePost"
-            name="postText"
-            placeholder="(Ex. Post...)"
-          />
-          <ErrorMessage className="error" name="postText" component="span" />
-          <label>Username: </label>
-          <Field
-            id="inputCreatePost"
-            name="username"
-            placeholder="(Ex. sammy)"
-          />
-          <ErrorMessage className="error" name="username" component="span" />
-          <button type="submit" on>
-            {" "}
-            Create Post
-          </button>
+        <Form className="formContainer w-full">
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full px-3">
+              <label
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="title"
+              >
+                Title
+              </label>
+              <Field
+                id="inputCreatePost"
+                name="title"
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                type="text"
+                placeholder="Enter the title of your post"
+              />{" "}
+              {/* thw title postText and username has the exactly same as that of the sql model only then the data could be send*/}
+              <ErrorMessage
+                className="error text-red-500 text-xs italic"
+                name="title"
+                component="span"
+              />
+            </div>
+            <div class="w-full px-3">
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="post"
+              >
+                Post
+              </label>
+              <Field
+                id="inputCreatePost"
+                name="postText"
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                type="text"
+                placeholder="Content of your post"
+              />
+              <ErrorMessage
+                className="error text-red-500 text-xs italic"
+                name="postText"
+                component="span"
+              />
+            </div>
+          </div>
+          <div class="flex flex-wrap -mx-3 mb-2">
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="grid-city"
+              >
+                Image
+              </label>
+              <Field
+                id="inputCreatePost"
+                name="image"
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                type="text"
+                placeholder="Image URL"
+              />
+              <ErrorMessage
+                className="error text-red-500 text-xs italic"
+                name="image"
+                component="span"
+              />
+            </div>
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="grid-city"
+              >
+                Date
+              </label>
+              <Field
+                id="inputCreatePost"
+                name="username"
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                type="date"
+              />
+              <ErrorMessage
+                className="error text-red-500 text-xs italic"
+                name="date"
+                component="span"
+              />
+            </div>
+          </div>
+          <br />
+
+          <div className="mb-5 flex justify-center drop-shadow-lg">
+            <button
+              className="bg-blue-900 flex justify-center p-3 pl-8 pr-8 m-2 rounded-full"
+              type="submit"
+            >
+              <p className=" text-1.5xl text-white">Create Post</p>
+            </button>
+          </div>
         </Form>
       </Formik>
     </div>
