@@ -12,6 +12,12 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  about:{
+    type: String,
+  },
+  email:{
+    type: String,
+  },
   posts: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "post",
