@@ -2,9 +2,10 @@ import React from "react";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function Reg() {
+  const navigate = useNavigate();
   const initialValues = {
     name: "",
     password: "",
@@ -23,7 +24,8 @@ function Reg() {
         alert(response.data.error);
       } else {
         //localStorage.setItem("accessToken", response.data.token);
-        alert("user created");
+        alert("User Created");
+        navigate("/login");
       }
     });
   };
@@ -50,11 +52,17 @@ function Reg() {
                   <div className="mt-8">
                     <div className="space-y-5">
                       <div>
-                        <label className="text-base font-medium font-body text-gray-900">
-                          Username
-                        </label>
-                        <ErrorMessage name="name" component="span" />
-                        <div className="mt-2.5">
+                        <div className="flex items-center justify-between">
+                          <label className="text-base font-medium font-body text-gray-900">
+                            Username
+                          </label>
+                          <ErrorMessage
+                            name="name"
+                            component="span"
+                            className="text-red-500 text-xs italic"
+                          />
+                        </div>
+                        <div className="mt-2.5 ">
                           <Field
                             required
                             id="inputCreatePost"
@@ -71,7 +79,11 @@ function Reg() {
                           <label className="text-base font-medium font-body text-gray-900">
                             Password
                           </label>
-                          <ErrorMessage name="password" component="span" />
+                          <ErrorMessage
+                            name="password"
+                            component="span"
+                            className="text-red-500 text-xs italic"
+                          />
                         </div>
                         <div className="mt-2.5">
                           <Field

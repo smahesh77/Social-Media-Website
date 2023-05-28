@@ -16,6 +16,7 @@ function Login() {
     password: Yup.string().min(4).max(20).required(),
   });
   const onSubmit = (data) => {
+    console.log("clicked login button");
     axios
       .post("http://localhost:4000/user/login", data)
       .then((response) => {
@@ -57,10 +58,16 @@ function Login() {
                   <div className="mt-8">
                     <div className="space-y-5">
                       <div>
-                        <label className="text-base font-medium font-body text-gray-900">
-                          Username
-                        </label>
-                        <ErrorMessage name="name" component="span" />
+                        <div className="flex items-center justify-between">
+                          <label className="text-base font-medium font-body text-gray-900">
+                            Username
+                          </label>
+                          <ErrorMessage
+                            name="name"
+                            component="span"
+                            className="text-red-500 text-xs italic"
+                          />
+                        </div>
                         <div className="mt-2.5">
                           <Field
                             required
@@ -78,7 +85,11 @@ function Login() {
                           <label className="text-base font-medium font-body text-gray-900">
                             Password
                           </label>
-                          <ErrorMessage name="password" component="span" />
+                          <ErrorMessage
+                            name="password"
+                            component="span"
+                            className="text-red-500 text-xs italic"
+                          />
                         </div>
                         <div className="mt-2.5">
                           <Field

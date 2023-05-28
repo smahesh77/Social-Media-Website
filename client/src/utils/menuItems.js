@@ -14,7 +14,7 @@ export const menuItems = [
   },
   {
     id: 3,
-    title: "Find",
+    title: "Discover",
     // icon: trend,
     link: "/",
   },
