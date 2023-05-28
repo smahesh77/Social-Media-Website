@@ -58,7 +58,7 @@ function CreatePost() {
                 id="inputCreatePost"
                 name="title"
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                type="text"
+                type="title"
                 placeholder="Enter the title of your post"
               />{" "}
               {/* thw title postText and username has the exactly same as that of the sql model only then the data could be send*/}
@@ -77,14 +77,14 @@ function CreatePost() {
               </label>
               <Field
                 id="inputCreatePost"
-                name="postText"
+                name="desc"
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                type="text"
+                type="desc"
                 placeholder="Content of your post"
               />
               <ErrorMessage
                 className="error text-red-500 text-xs italic"
-                name="postText"
+                name="desc"
                 component="span"
               />
             </div>
@@ -99,14 +99,14 @@ function CreatePost() {
               </label>
               <Field
                 id="inputCreatePost"
-                name="image"
+                name="imageUrl"
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                type="text"
+                type="imageUrl"
                 placeholder="Image URL"
               />
               <ErrorMessage
                 className="error text-red-500 text-xs italic"
-                name="image"
+                name="imageUrl"
                 component="span"
               />
             </div>
