@@ -14,7 +14,11 @@ function CreatePost() {
   };
 
   const onSubmit = (data) => {
-    axios.post("https://sochub.onrender.com/posts/create", data).then((response) => {
+    axios.post("https://sochub.onrender.com/posts/create", data,{
+          headers: {
+            accessToken: localStorage.getItem("accessToken"),
+          },
+        }).then((response) => {
       // sends the data to server
       if (response.data.error) {
         alert("You are not Authorized, please log in!");
@@ -30,7 +34,7 @@ function CreatePost() {
   const validationSchema = yup.object().shape({
     // basically checks for stuff like pass too weak name too small valid gmail stuff like that
     title: yup.string().required(), // enter your custom error messges inside the required
-    postText: yup.string().required(),
+    desc: yup.string().required(),
     username: yup
       .string()
       .required("Enter your name")
