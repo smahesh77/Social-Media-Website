@@ -8,7 +8,7 @@ import Navbar from "./pages/Navbar";
 import Profile from "./pages/Profile";
 import Find from "./pages/find";
 import Rightbar from "./pages/Rightbar";
-import CreatePost from "./pages/CreatePost";
+import CreatePost from "./pages/createPost";
 import "./App.css";
 
 function App() {
