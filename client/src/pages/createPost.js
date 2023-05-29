@@ -9,6 +9,7 @@ function CreatePost() {
   let navigate = useNavigate();
   const initialValues = {
     title: "",
+<<<<<<< HEAD:client/src/pages/createPost.js
     desc: "",
     imageUrl: "",
   };
@@ -29,13 +30,39 @@ function CreatePost() {
           navigate("/");
         }
       });
+=======
+    desct: "",
+    username: "",
+  };
+
+  const onSubmit = (data) => {
+    axios.post("https://sochub.onrender.com/posts/create", data,{
+          headers: {
+            accessToken: localStorage.getItem("accessToken"),
+          },
+        }).then((response) => {
+      // sends the data to server
+      if (response.data.error) {
+        alert("You are not Authorized, please log in!");
+        navigate("/log");
+      } else {
+        console.log(response.data);
+        console.log("IT WORKS");
+        navigate("/");
+      }
+    });
+>>>>>>> 814324478de1d572ab14971555d9e9174d0afd6f:client/src/pages/CreatePost.js
   };
 
   const validationSchema = yup.object().shape({
     // basically checks for stuff like pass too weak name too small valid gmail stuff like that
     title: yup.string().required(), // enter your custom error messges inside the required
     desc: yup.string().required(),
+<<<<<<< HEAD:client/src/pages/createPost.js
     tag: yup
+=======
+    username: yup
+>>>>>>> 814324478de1d572ab14971555d9e9174d0afd6f:client/src/pages/CreatePost.js
       .string()
       .required("Enter assocaited tag")
       .min(3, "Minimum 3 characters")
@@ -62,7 +89,7 @@ function CreatePost() {
                 id="inputCreatePost"
                 name="title"
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                type="text"
+                type="title"
                 placeholder="Enter the title of your post"
               />{" "}
               {/* thw title postText and username has the exactly same as that of the sql model only then the data could be send*/}
@@ -83,7 +110,7 @@ function CreatePost() {
                 id="inputCreatePost"
                 name="desc"
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                type="text"
+                type="desc"
                 placeholder="Content of your post"
               />
               <ErrorMessage
@@ -105,7 +132,7 @@ function CreatePost() {
                 id="inputCreatePost"
                 name="imageUrl"
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                type="text"
+                type="imageUrl"
                 placeholder="Image URL"
               />
               <ErrorMessage
