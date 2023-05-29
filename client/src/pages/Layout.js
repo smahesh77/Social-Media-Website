@@ -7,10 +7,12 @@ function Layout() {
   const [listOfPosts, setListOfPosts] = useState([]);
   const [user, setuser] = useState();
   let navigate = useNavigate();
+  let url;
 
   useEffect(() => {
     axios.get("https://sochub.onrender.com/posts").then((response) => {
       setListOfPosts(response.data.posts);
+      console.log(response.data.posts);
     });
   }, []);
 
@@ -40,8 +42,8 @@ function Layout() {
                 <div className="overflow-hidden bg-white rounded drop-shadow-xl">
                   <img
                     className="post-image h-auto w-full max-h-56 rounded-lg transition-shadow"
-                    src="https://tecdn.b-cdn.net/img/new/standard/city/047.jpg"
-                    alt="post image "
+                    src={`${value.imageUrl}`}
+                    alt="url"
                   />
                   <div className="px-6 py-4">
                     <div className="font-bold text-xl mb-2">{value.title}</div>
@@ -49,13 +51,7 @@ function Layout() {
                   </div>
                   <div className="px-6 pt-4 pb-2">
                     <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                      #photography
-                    </span>
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                      #travel
-                    </span>
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                      {value.userId}
+                      {value.tag}
                     </span>
                   </div>
                 </div>

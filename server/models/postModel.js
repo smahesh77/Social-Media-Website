@@ -16,10 +16,14 @@ const postModel = db.model(
       type: String,
       //required: true,
     },
+    tag: {
+      type: String,
+      //required: true,
+    },
     userId: {
       type: db.Schema.Types.ObjectId,
       ref: "user",
-      //required:true
+      //required: true,
     },
   })
 );

@@ -9,32 +9,36 @@ function CreatePost() {
   let navigate = useNavigate();
   const initialValues = {
     title: "",
-    postText: "",
-    username: "",
+    desc: "",
+    imageUrl: "",
   };
 
   const onSubmit = (data) => {
-    axios.post("https://sochub.onrender.com/posts/create", data).then((response) => {
-      // sends the data to server
-      if (response.data.error) {
-        alert("You are not Authorized, please log in!");
-        navigate("/log");
-      } else {
-        console.log(response.data);
-        console.log("IT WORKS");
-        navigate("/");
-      }
-    });
+    console.log(data);
+    axios
+      .post("https://sochub.onrender.com/posts/create", data)
+      .then((response) => {
+        console.log(data);
+        // sends the data to server
+        if (response.data.error) {
+          alert("You are not Authorized, please log in!");
+          navigate("/log");
+        } else {
+          console.log(response.data);
+          console.log("IT WORKS");
+          navigate("/");
+        }
+      });
   };
 
   const validationSchema = yup.object().shape({
     // basically checks for stuff like pass too weak name too small valid gmail stuff like that
     title: yup.string().required(), // enter your custom error messges inside the required
-    postText: yup.string().required(),
-    username: yup
+    desc: yup.string().required(),
+    tag: yup
       .string()
-      .required("Enter your name")
-      .min(3, "Minimum 4 characters")
+      .required("Enter assocaited tag")
+      .min(3, "Minimum 3 characters")
       .max(15, "Maximum length exceeded"),
   });
 
@@ -50,7 +54,7 @@ function CreatePost() {
             <div className="w-full px-3">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="title"
+                htmlFor="title"
               >
                 Title
               </label>
@@ -68,64 +72,65 @@ function CreatePost() {
                 component="span"
               />
             </div>
-            <div class="w-full px-3">
+            <div className="w-full px-3">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="post"
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                htmlFor="desc"
               >
                 Post
               </label>
               <Field
                 id="inputCreatePost"
-                name="postText"
+                name="desc"
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 type="text"
                 placeholder="Content of your post"
               />
               <ErrorMessage
                 className="error text-red-500 text-xs italic"
-                name="postText"
+                name="desc"
                 component="span"
               />
             </div>
           </div>
-          <div class="flex flex-wrap -mx-3 mb-2">
-            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+          <div className="flex flex-wrap -mx-3 mb-2">
+            <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-city"
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                htmlFor="grid-city"
               >
                 Image
               </label>
               <Field
                 id="inputCreatePost"
-                name="image"
+                name="imageUrl"
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 type="text"
                 placeholder="Image URL"
               />
               <ErrorMessage
                 className="error text-red-500 text-xs italic"
-                name="image"
+                name="imageUrl"
                 component="span"
               />
             </div>
-            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-city"
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                htmlFor="tag"
               >
-                Date
+                Add A Tag
               </label>
               <Field
                 id="inputCreatePost"
-                name="username"
+                name="tag"
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                type="date"
+                type="text"
+                placeholder="Enter suitable tag"
               />
               <ErrorMessage
                 className="error text-red-500 text-xs italic"
-                name="date"
+                name="tag"
                 component="span"
               />
             </div>
